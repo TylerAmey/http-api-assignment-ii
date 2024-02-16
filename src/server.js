@@ -83,6 +83,12 @@ const onRequest = (request, response) => {
   // first we have to parse information from the url
   const parsedUrl = url.parse(request.url);
 
+  // check if method was POST, otherwise assume GET
+  // for the sake of this example
+  if (request.method === 'POST') {
+    return handlePost(request, response, parsedUrl);
+  }
+
   // next we need to ensure that we can handle the request
   // method that they are making the request with. This server
   // is only built to handle GET and HEAD requests, so we want
@@ -100,12 +106,6 @@ const onRequest = (request, response) => {
   // use that same syntax to call the actual function.
   if (urlStruct[request.method][parsedUrl.pathname]) {
     return urlStruct[request.method][parsedUrl.pathname](request, response);
-  }
-
-  // check if method was POST, otherwise assume GET
-  // for the sake of this example
-  if (request.method === 'POST') {
-    handlePost(request, response, parsedUrl);
   }
 
   return urlStruct[request.method].notFound(request, response);
