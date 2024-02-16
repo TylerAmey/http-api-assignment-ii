@@ -52,8 +52,42 @@
          }
         content.innerHTML += `<p>${jsonString}</p>`;
       } else {
-          //content.innerHTML += '<p>Meta Data Received</p>';
+          let obj = await response.json();
+
+          if(obj.message){
+            content.innerHTML += `<p>${obj.message}</p>`;
+          }
       }
+    };
+
+    //Uses fetch to send a postRequest. Marksed as async because we use await
+    //within it.
+    const sendPost = async (nameForm) => {
+      //Grab all the info from the form
+      const nameAction = nameForm.getAttribute('action');
+      const nameMethod = nameForm.getAttribute('method');
+      
+      const nameField = nameForm.querySelector('#nameField');
+      const ageField = nameForm.querySelector('#ageField');
+
+      //Build a data string in the FORM-URLENCODED format.
+      const formData = `name=${nameField.value}&age=${ageField.value}`;
+
+      //Make a fetch request and await a response. Set the method to
+      //the one provided by the form (POST). Set the headers. Content-Type
+      //is the type of data we are sending. Accept is the data we would like
+      //in response. Then add our FORM-URLENCODED string as the body of the request.
+      let response = await fetch(nameAction, {
+        method: nameMethod,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json',
+        },
+        body: formData,
+      });
+
+      //Once we have a response, handle it.
+      handleResponse(response);
     };
 
     //function to send request. This is marked as async since we will use await.
@@ -80,6 +114,7 @@
     const init = () => {
       //grab form
       const userForm = document.querySelector('#userForm');
+      const nameForm = document.querySelector('#nameForm');
       
       //function to handle our request. In this case, it also cancels the built in html form action
       const getUsers = (e) => {
@@ -87,9 +122,17 @@
         requestUpdate(userForm);
         return false;
       }
+
+      const addUser = (e) => {
+        e.preventDefault();
+        sendPost(nameForm);
+        return false;
+      }
       
       //add event listener
       userForm.addEventListener('submit', getUsers);
+
+      nameForm.addEventListener('submit', addUser);
     };
 
     window.onload = init;
