@@ -5,17 +5,13 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
-        //Handle response takes in the response object (from our fetch request), and 
-    //a boolean of if we should parse the response or not (since head requests have
-    //no actual response). It is marked as async because we will use await.
+
     const handleResponse = async (response, parseResponse) => {
       
-      //Grab the content section so that we can write to it
       const content = document.querySelector('#content');
 
       let isNotReal = false;
 
-      //Based on the status of the response, write something.
       switch(response.status) {
         case 200: 
           content.innerHTML = `<b>Success</b>`;
@@ -35,12 +31,10 @@
           break;
       }
 
-      //If we should parse a response (meaning we made a get request)
       if(parseResponse) {
-        //Parse the response to json. This is an async function, so we will await it.
+
         let obj = await response.json();
         
-        //To display the data easily, we will just stringify it again and display it.
         let jsonString;
 
          if(isNotReal){
@@ -60,23 +54,16 @@
       }
     };
 
-    //Uses fetch to send a postRequest. Marksed as async because we use await
-    //within it.
     const sendPost = async (nameForm) => {
-      //Grab all the info from the form
+
       const nameAction = nameForm.getAttribute('action');
       const nameMethod = nameForm.getAttribute('method');
       
       const nameField = nameForm.querySelector('#nameField');
       const ageField = nameForm.querySelector('#ageField');
 
-      //Build a data string in the FORM-URLENCODED format.
       const formData = `name=${nameField.value}&age=${ageField.value}`;
 
-      //Make a fetch request and await a response. Set the method to
-      //the one provided by the form (POST). Set the headers. Content-Type
-      //is the type of data we are sending. Accept is the data we would like
-      //in response. Then add our FORM-URLENCODED string as the body of the request.
       let response = await fetch(nameAction, {
         method: nameMethod,
         headers: {
@@ -86,18 +73,14 @@
         body: formData,
       });
 
-      //Once we have a response, handle it.
       handleResponse(response);
     };
 
-    //function to send request. This is marked as async since we will use await.
     const requestUpdate = async (userForm) => {
       
-      //Grab the url and method from the html form below
       const url = userForm.querySelector('#urlField').value;
       const method = userForm.querySelector('#methodSelect').value;
       
-      //Await our fetch response. Go to the URL, use the right method, and attach the headers.
       let response = await fetch(url, {
         method,
         headers: {
@@ -105,18 +88,14 @@
         },
       });
 
-      //Once we have our response, send it into handle response. The second parameter is a boolean
-      //that says if we should parse the response or not. We will get a response to parse on get
-      //requests so we can do an inline boolean check, which will return a true or false to pass in.
       handleResponse(response, method === 'get');
     };
 
     const init = () => {
-      //grab form
+
       const userForm = document.querySelector('#userForm');
       const nameForm = document.querySelector('#nameForm');
       
-      //function to handle our request. In this case, it also cancels the built in html form action
       const getUsers = (e) => {
         e.preventDefault();
         requestUpdate(userForm);
@@ -129,7 +108,6 @@
         return false;
       }
       
-      //add event listener
       userForm.addEventListener('submit', getUsers);
 
       nameForm.addEventListener('submit', addUser);
