@@ -10,8 +10,6 @@
       
       const content = document.querySelector('#content');
 
-      let isNotReal = false;
-
       switch(response.status) {
         case 200: 
           content.innerHTML = `<b>Success</b>`;
@@ -19,12 +17,14 @@
         case 201:
           content.innerHTML = `<b>Created</b>`;
           break;
+        case 204:
+          content.innerHTML = '<b>204 Updated No Content<b>';
+          break;
         case 400: 
           content.innerHTML = `<b>400 Bad Request</b>`;
           break;
         case 404:
           content.innerHTML = `<b>404 Resource Not Found</b>`;
-          isNotReal = true;
           break;
         default: 
           content.innerHTML = `Error code not implemented by client.`;
@@ -37,11 +37,10 @@
         
         let jsonString;
 
-         if(isNotReal){
+         if(obj.message){
           jsonString = JSON.stringify(obj.message);
-          isNotReal = false;
          }
-         else{
+         if(obj.users){
           jsonString = JSON.stringify(obj.users);
          }
         content.innerHTML += `<p>${jsonString}</p>`;
