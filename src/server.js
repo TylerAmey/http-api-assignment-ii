@@ -1,3 +1,4 @@
+//server
 const http = require('http');
 const url = require('url');
 const query = require('querystring');
