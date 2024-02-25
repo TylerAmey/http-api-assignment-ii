@@ -117,24 +117,18 @@
 </head>
 <body>
   <section id="top">
-    <h3>POST Status Code Tests</h3>
-    <form id="nameForm" action="/addUser" method="post">
-      <label for="name">Name: </label>
+    <h1>Fortnite Cosmetic Wish List</h1>
+    <form id="nameForm" action="/addCosmetic" method="post">
+      <label for="name">Cosmetic Name: </label>
       <input id="nameField" type="text" name="name" />
-      <label for="age">Age: </label>
-      <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
-      <input type="submit" value="Add User" />
+      <input type="submit" value="Add Cosmetic" />
     </form>
     <form id="userForm" action="/getUsers" method="get">
       <select id='urlField'>
-        <option value='/getUsers'>/getUsers</option>
-        <option value='/notReal'>/notReal</option>
+        <option value='/itemShop'>Check Item Shop</option>
+        <option value='/lastSeen'>Last Seen</option>
       </select>
-      <select id="methodSelect">
-        <option value="get">GET</option>
-        <option value="head">HEAD</option>
-      </select>
-      <input type="submit" value="Get User" />
+      <input type="submit" value="Search"/>
     </form>
   </section>
   <section id="content">

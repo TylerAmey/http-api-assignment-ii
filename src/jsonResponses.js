@@ -1,4 +1,4 @@
-const users = {};
+const cosmetics = {};
 
 const respondJSON = (request, response, status, object) => {
 
@@ -21,39 +21,56 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-const getUsers = (request, response) => {
+const getCosmetics = (request, response) => {
 
   const responseJSON = {
-    users,
+    cosmetics,
   };
 
   return respondJSON(request, response, 200, responseJSON);
 
 };
 
-const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200);
+const getCosmeticsMeta = (request, response) => respondJSONMeta(request, response, 200);
 
-const addUser = (request, response, body) => {
+const addCosmetics = (request, response, body) => {
 
-    const responseJSON = {
-    message: 'Name and age are both required.',
-
+  const responseJSON = {
+    message: 'Cosmetic name is required.',
   };
 
-  if (!body.name || !body.age) {
+  if (!body.name) {
+
+
+/*
+    Check to see if cosmetic exists using the fortniteAPI
+
+    let input = body.name.toLowerCase().split(" ").join("");
+
+    let found = false;
+
+    for (cosmetic in api.cosmetics (the api)){
+      if (cosmetic.name === input){
+        let found = true;
+      }
+    }
+
+    if (!found){
+      response.JSON.message = "Cosmetic not found"
+    }
+*/
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
 
   let responseCode = 204;
 
-  if (!users[body.name]) {
+  if (!cosmetics[body.name]) {
     responseCode = 201;
-    users[body.name] = {};
+    cosmetics[body.name] = {};
   }
 
-  users[body.name].name = body.name;
-  users[body.name].age = body.age;
+  cosmetics[body.name].name = body.name;
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully';
@@ -63,13 +80,13 @@ const addUser = (request, response, body) => {
   return respondJSONMeta(request, response, responseCode);
 };
 
-const updateUser = (request, response) => {
+const updateCosmetics = (request, response) => {
 
-  const newUser = {
-    createdAt: Date.now(),
-  };
+  // const newUser = {
+  //   createdAt: Date.now(),
+  // };
 
-  users[newUser.createdAt] = newUser;
+  cosmetics[newUser] = newUser;
 
   return respondJSON(request, response, 201, newUser);
 };
@@ -92,10 +109,10 @@ const notFoundMeta = (request, response) => {
 };
 
 module.exports = {
-  getUsers,
-  getUsersMeta,
-  updateUser,
-  addUser,
+  getCosmetics,
+  getCosmeticsMeta,
+  updateCosmetics,
+  addCosmetics,
   notFound,
   notFoundMeta,
 };

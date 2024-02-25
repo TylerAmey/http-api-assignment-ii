@@ -11,16 +11,15 @@ const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
     '/style.css': htmlHandler.getCSS,
-    '/getUsers': jsonHandler.getUsers,
-    '/notReal': jsonHandler.notReal,
+    '/lastSeen': jsonHandler.getCosmetics,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
-    '/getUsers': jsonHandler.getUsersMeta,
+    '/itemShop': jsonHandler.getCosmeticsMeta,
     notFound: jsonHandler.notFoundMeta,
   },
   POST: {
-    '/addUser': jsonHandler.addUser,
+    '/addCosmetic': jsonHandler.addCosmetics,
   },
 };
 
@@ -49,7 +48,7 @@ const parseBody = (request, response, handler) => {
 const handlePost = (request, response, parsedUrl) => {
 
     if (parsedUrl.pathname === '/addUser') {
-        parseBody(request, response, jsonHandler.addUser);
+        parseBody(request, response, jsonHandler.addCosmetics);
     }
 
 };

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'fortniteFont';
+  src: url(/client/Fortnite/fortnite/fortnite.otf);
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -11,7 +16,8 @@ html, body {
 }
 
 #top h1 {
-  font-size: 2em;
+  font-family: fortniteFont;
+  font-size: 5em;
 }
 
 #content {
