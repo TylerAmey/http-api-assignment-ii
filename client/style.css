@@ -1,6 +1,11 @@
 
 /* Colors and basic style reference: https://codepen.io/ixahmedxi/pen/eLzjmm */
 
+@font-face {
+  font-family: fortniteFont;
+  src: url(./client/Fortnite/fortnite/Burbank\ Big\ Condensed\ Black.otf);
+}
+
 body {
   background-color: #2c3076; /* Dark background color */
   font-family: Arial, sans-serif; /* Use a sans-serif font like Fortnite */
@@ -21,6 +26,7 @@ html, body {
 #top h1 {
   color:#FFFFFF;
   font-size: 3.5em;
+  font-family: fortniteFont;
 }
 
 form{
