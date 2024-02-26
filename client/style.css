@@ -1,3 +1,6 @@
+
+/* Colors and basic style reference: https://codepen.io/ixahmedxi/pen/eLzjmm */
+
 body {
   background-color: #2c3076; /* Dark background color */
   font-family: Arial, sans-serif; /* Use a sans-serif font like Fortnite */
@@ -35,6 +38,8 @@ label{
   font-size: 2em;
   text-align: center;
 }
+
+/* Reference matieral: https://fdossena.com/?p=html5cool/buttons/i.frag */
 
 input, select{
   display:inline-block;
