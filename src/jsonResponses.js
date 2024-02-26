@@ -1,7 +1,6 @@
 const cosmetics = {};
 
 const respondJSON = (request, response, status, object) => {
-
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -12,7 +11,6 @@ const respondJSON = (request, response, status, object) => {
 };
 
 const respondJSONMeta = (request, response, status) => {
-
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -22,27 +20,22 @@ const respondJSONMeta = (request, response, status) => {
 };
 
 const getCosmetics = (request, response) => {
-
   const responseJSON = {
     cosmetics,
   };
 
   return respondJSON(request, response, 200, responseJSON);
-
 };
 
 const getCosmeticsMeta = (request, response) => respondJSONMeta(request, response, 200);
 
 const addCosmetics = (request, response, body) => {
-
   const responseJSON = {
     message: 'Cosmetic name is required.',
   };
 
   if (!body.name) {
-
-
-/*
+    /*
     Check to see if cosmetic exists using the fortniteAPI
 
     let input = body.name.toLowerCase().split(" ").join("");
@@ -69,7 +62,7 @@ const addCosmetics = (request, response, body) => {
     responseCode = 201;
     cosmetics[body.name] = {};
   }
-
+  console.log("hello");
   cosmetics[body.name].name = body.name;
 
   if (responseCode === 201) {
@@ -81,10 +74,9 @@ const addCosmetics = (request, response, body) => {
 };
 
 const updateCosmetics = (request, response) => {
-
-  // const newUser = {
-  //   createdAt: Date.now(),
-  // };
+  const newUser = {
+    createdAt: Date.now(),
+  };
 
   cosmetics[newUser] = newUser;
 
@@ -92,20 +84,16 @@ const updateCosmetics = (request, response) => {
 };
 
 const notFound = (request, response) => {
-
-    const responseJSON = {
-        message: 'The page you are looking for was not found.',
-        id: 'notFound',
-    };
+  const responseJSON = {
+    message: 'The page you are looking for was not found.',
+    id: 'notFound',
+  };
 
   respondJSON(request, response, 404, responseJSON);
-  
 };
 
 const notFoundMeta = (request, response) => {
-
-    respondJSONMeta(request, response, 404);
-
+  respondJSONMeta(request, response, 404);
 };
 
 module.exports = {

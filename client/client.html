@@ -3,6 +3,7 @@
 <head>
   <title>Our simple HTTP server</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
   
   <script>
 
@@ -43,12 +44,12 @@
          if(obj.users){
           jsonString = JSON.stringify(obj.users);
          }
-        content.innerHTML += `<p>${jsonString}</p>`;
+        content.innerHTML += `<p>Test${jsonString}</p>`;
       } else {
           let obj = await response.json();
 
           if(obj.message){
-            content.innerHTML += `<p>${obj.message}</p>`;
+            content.innerHTML += `<p>Test${obj.message}</p>`;
           }
       }
     };
@@ -59,9 +60,8 @@
       const nameMethod = nameForm.getAttribute('method');
       
       const nameField = nameForm.querySelector('#nameField');
-      const ageField = nameForm.querySelector('#ageField');
 
-      const formData = `name=${nameField.value}&age=${ageField.value}`;
+      const formData = `name=${nameField.value}`;
 
       let response = await fetch(nameAction, {
         method: nameMethod,
@@ -75,41 +75,40 @@
       handleResponse(response);
     };
 
-    const requestUpdate = async (userForm) => {
+    const requestUpdate = async (actionForm) => {
       
-      const url = userForm.querySelector('#urlField').value;
-      const method = userForm.querySelector('#methodSelect').value;
+      const url = actionForm.querySelector('#urlField').value;
       
       let response = await fetch(url, {
-        method,
         headers: {
             'Accept': 'application/json'
         },
       });
 
-      handleResponse(response, method === 'get');
+      handleResponse(response);
     };
 
     const init = () => {
 
-      const userForm = document.querySelector('#userForm');
+      const actionForm = document.querySelector('#actionForm');
       const nameForm = document.querySelector('#nameForm');
-      
-      const getUsers = (e) => {
-        e.preventDefault();
-        requestUpdate(userForm);
-        return false;
-      }
 
-      const addUser = (e) => {
+      const addCosmetic = (e) => {
         e.preventDefault();
         sendPost(nameForm);
         return false;
       }
       
-      userForm.addEventListener('submit', getUsers);
+      const getCosmetics = (e) => {
+        e.preventDefault();
+        requestUpdate(actionForm);
+        return false;
+      }
+      
+      nameForm.addEventListener('submit', addCosmetic);
 
-      nameForm.addEventListener('submit', addUser);
+      actionForm.addEventListener('submit', getCosmetics);
+
     };
 
     window.onload = init;
@@ -121,14 +120,14 @@
     <form id="nameForm" action="/addCosmetic" method="post">
       <label for="name">Cosmetic Name: </label>
       <input id="nameField" type="text" name="name" />
-      <input type="submit" value="Add Cosmetic" />
+      <input class ="styledButton" type="submit" value="Add to Wishlist" />
     </form>
-    <form id="userForm" action="/getUsers" method="get">
-      <select id='urlField'>
+    <form id="actionForm" action="/getCosmetics" method="get">
+      <select class ="styledButton" id='urlField'>
         <option value='/itemShop'>Check Item Shop</option>
         <option value='/lastSeen'>Last Seen</option>
       </select>
-      <input type="submit" value="Search"/>
+      <input class ="styledButton" type="submit" value="Search"/>
     </form>
   </section>
   <section id="content">

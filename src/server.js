@@ -1,4 +1,4 @@
-//server
+// server
 const http = require('http');
 const url = require('url');
 const query = require('querystring');
@@ -12,6 +12,7 @@ const urlStruct = {
     '/': htmlHandler.getIndex,
     '/style.css': htmlHandler.getCSS,
     '/lastSeen': jsonHandler.getCosmetics,
+    '/itemShop': jsonHandler.getCosmeticsMeta,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
@@ -24,7 +25,6 @@ const urlStruct = {
 };
 
 const parseBody = (request, response, handler) => {
-
   const body = [];
 
   request.on('error', (err) => {
@@ -46,15 +46,12 @@ const parseBody = (request, response, handler) => {
 };
 
 const handlePost = (request, response, parsedUrl) => {
-
-    if (parsedUrl.pathname === '/addUser') {
-        parseBody(request, response, jsonHandler.addCosmetics);
-    }
-
+  if (parsedUrl.pathname === '/addUser') {
+    parseBody(request, response, jsonHandler.addCosmetics);
+  }
 };
 
 const onRequest = (request, response) => {
-
   const parsedUrl = url.parse(request.url);
 
   if (request.method === 'POST') {
