@@ -11,6 +11,7 @@ const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
     '/style.css': htmlHandler.getCSS,
+    '/fortnite.otf': htmlHandler.getFont,
     '/lastSeen': jsonHandler.getCosmetics,
     '/itemShop': jsonHandler.getCosmeticsMeta,
     notFound: jsonHandler.notFound,

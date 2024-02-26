@@ -117,11 +117,13 @@
 <body>
   <section id="top">
     <h1>Fortnite Cosmetic Wish List</h1>
+    <h3>Enter your cosmetic's name to add to your wishlist!</h3>
     <form id="nameForm" action="/addCosmetic" method="post">
-      <label for="name">Cosmetic Name: </label>
+      <!-- <label for="name">Cosmetic Name: </label> -->
       <input id="nameField" type="text" name="name" />
       <input class ="styledButton" type="submit" value="Add to Wishlist" />
     </form>
+    <h3>Interact with your wishlist!</h3>
     <form id="actionForm" action="/getCosmetics" method="get">
       <select class ="styledButton" id='urlField'>
         <option value='/itemShop'>Check Item Shop</option>

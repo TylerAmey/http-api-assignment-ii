@@ -1,9 +1,10 @@
 
 /* Colors and basic style reference: https://codepen.io/ixahmedxi/pen/eLzjmm */
 
+/* have to host this */
 @font-face {
   font-family: fortniteFont;
-  src: url(./client/Fortnite/fortnite/Burbank\ Big\ Condensed\ Black.otf);
+  src: url(/fortnite.otf);
 }
 
 body {
@@ -25,7 +26,7 @@ html, body {
 
 #top h1 {
   color:#FFFFFF;
-  font-size: 3.5em;
+  font-size: 4em;
   font-family: fortniteFont;
 }
 
@@ -33,10 +34,11 @@ form{
   padding: 20px;
 }
 
-label{
+h3{
   font-weight: bold;
   font-size: 2em;
   color:#FFFFFF;
+  font-family: fortniteFont;
 }
 
 #content {
@@ -52,12 +54,12 @@ input, select{
   border-radius:0.15em;
   padding:.75em 1.5em;
   margin:0 0.3em 0.3em 0;
-  font-family:'Roboto',sans-serif;
+  /* font-family:'Roboto',sans-serif; */
   box-sizing: border-box;
   text-decoration:none;
   font-weight:400;
   color:#FFFFFF;
-  background-color:#3369ff;
+  background-color:#419dcd;
 }
 
 option{
