@@ -46,29 +46,29 @@ const addCosmetics = (request, response, body) => {
   // https://www.geeksforgeeks.org/how-to-use-the-javascript-fetch-api-to-get-data/
   // Check against the search and return if the cosmetic isn't found.
   // name to check = "Metal%20Gear%20Mk.%20II"
-  fetch(`${COSMETIC_URL}/?name=${body.name}`).then((apiResponse) => {
+  return fetch(`${COSMETIC_URL}/?name=${body.name}`).then((apiResponse) => {
     console.log(apiResponse);
     if (apiResponse.status !== 200) {
       responseJSON.message = 'Cosmetic not found';
       responseJSON.id = 'missingParams';
-      return respondJSON(request, response, 400, responseJSON);\
+      return respondJSON(request, response, 400, responseJSON);
     }
+
+    let responseCode = 204;
+
+    if (!cosmetics[body.name]) {
+      responseCode = 201;
+      cosmetics[body.name] = {};
+    }
+    cosmetics[body.name].name = body.name;
+
+    if (responseCode === 201) {
+      responseJSON.message = `${body.name} added to Wishlist`;
+      return respondJSON(request, response, responseCode, responseJSON);
+    }
+
+    return respondJSONMeta(request, response, responseCode);
   });
-
-  let responseCode = 204;
-
-  if (!cosmetics[body.name]) {
-    responseCode = 201;
-    cosmetics[body.name] = {};
-  }
-  cosmetics[body.name].name = body.name;
-
-  if (responseCode === 201) {
-    responseJSON.message = 'Created Successfully';
-    return respondJSON(request, response, responseCode, responseJSON);
-  }
-
-  return respondJSONMeta(request, response, responseCode);
 };
 
 const updateCosmetics = (request, response) => {

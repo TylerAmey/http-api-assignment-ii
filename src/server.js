@@ -47,7 +47,7 @@ const parseBody = (request, response, handler) => {
 };
 
 const handlePost = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/addUser') {
+  if (parsedUrl.pathname === '/addCosmetic') {
     parseBody(request, response, jsonHandler.addCosmetics);
   }
 };
