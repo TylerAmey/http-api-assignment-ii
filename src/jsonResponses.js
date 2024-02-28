@@ -1,7 +1,6 @@
-
-const COSMETIC_URL = "https://fortnite-api.com/v2/cosmetics/br/search";
-const SHOP_URL = "https://fortnite-api.com/v2/shop/br"
-const API_KEY = "96539bc8-c74b-4be1-a6c1-49dc1ece65fb"
+const COSMETIC_URL = 'https://fortnite-api.com/v2/cosmetics/br/search';
+// const SHOP_URL = 'https://fortnite-api.com/v2/shop/br';
+// const API_KEY = '96539bc8-c74b-4be1-a6c1-49dc1ece65fb';
 
 const cosmetics = {};
 
@@ -44,14 +43,15 @@ const addCosmetics = (request, response, body) => {
     return respondJSON(request, response, 400, responseJSON);
   }
 
-  //https://www.geeksforgeeks.org/how-to-use-the-javascript-fetch-api-to-get-data/
-  //Check against the search and return if the cosmetic isn't found.
-  //name to check = "Metal%20Gear%20Mk.%20II"
-  fetch(`${COSMETIC_URL}/?name=${body.name}`).then(response =>{
-    if(response.status != 200){
-      responseJSON.message = "Cosmetic not found"
+  // https://www.geeksforgeeks.org/how-to-use-the-javascript-fetch-api-to-get-data/
+  // Check against the search and return if the cosmetic isn't found.
+  // name to check = "Metal%20Gear%20Mk.%20II"
+  fetch(`${COSMETIC_URL}/?name=${body.name}`).then((apiResponse) => {
+    console.log(apiResponse);
+    if (apiResponse.status !== 200) {
+      responseJSON.message = 'Cosmetic not found';
       responseJSON.id = 'missingParams';
-      return respondJSON(request, response, 400, responseJSON);
+      return respondJSON(request, response, 400, responseJSON);\
     }
   });
 
@@ -61,7 +61,6 @@ const addCosmetics = (request, response, body) => {
     responseCode = 201;
     cosmetics[body.name] = {};
   }
-  console.log("hello");
   cosmetics[body.name].name = body.name;
 
   if (responseCode === 201) {
