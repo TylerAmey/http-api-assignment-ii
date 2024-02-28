@@ -1,3 +1,8 @@
+
+const COSMETIC_URL = "https://fortnite-api.com/v2/cosmetics/br/search";
+const SHOP_URL = "https://fortnite-api.com/v2/shop/br"
+const API_KEY = "96539bc8-c74b-4be1-a6c1-49dc1ece65fb"
+
 const cosmetics = {};
 
 const respondJSON = (request, response, status, object) => {
@@ -35,26 +40,20 @@ const addCosmetics = (request, response, body) => {
   };
 
   if (!body.name) {
-    /*
-    Check to see if cosmetic exists using the fortniteAPI
-
-    let input = body.name.toLowerCase().split(" ").join("");
-
-    let found = false;
-
-    for (cosmetic in api.cosmetics (the api)){
-      if (cosmetic.name === input){
-        let found = true;
-      }
-    }
-
-    if (!found){
-      response.JSON.message = "Cosmetic not found"
-    }
-*/
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
+
+  //https://www.geeksforgeeks.org/how-to-use-the-javascript-fetch-api-to-get-data/
+  //Check against the search and return if the cosmetic isn't found.
+  //name to check = "Metal%20Gear%20Mk.%20II"
+  fetch(`${COSMETIC_URL}/?name=${body.name}`).then(response =>{
+    if(response.status != 200){
+      responseJSON.message = "Cosmetic not found"
+      responseJSON.id = 'missingParams';
+      return respondJSON(request, response, 400, responseJSON);
+    }
+  });
 
   let responseCode = 204;
 
