@@ -81,3 +81,11 @@ option{
     margin:0.4em auto;
   }
 }
+
+.notInShop{
+  color:crimson;
+}
+
+.inShop{
+  color:forestgreen;
+}

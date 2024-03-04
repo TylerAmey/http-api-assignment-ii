@@ -13,11 +13,10 @@ const urlStruct = {
     '/style.css': htmlHandler.getCSS,
     '/fortnite.otf': htmlHandler.getFont,
     '/lastSeen': jsonHandler.getCosmetics,
-    '/itemShop': jsonHandler.getCosmeticsMeta,
+    '/itemShop': jsonHandler.getCosmetics,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
-    '/itemShop': jsonHandler.getCosmeticsMeta,
     notFound: jsonHandler.notFoundMeta,
   },
   POST: {
